@@ -13,6 +13,9 @@ config :extext, ExtextWeb.Endpoint,
   pubsub: [name: Extext.PubSub,
            adapter: Phoenix.PubSub.PG2]
 
+config :extext,
+  directories: ["test/sample_textfiles"]
+
 # Configures Elixir's Logger
 config :logger, :console,
   format: "$time $metadata[$level] $message\n",

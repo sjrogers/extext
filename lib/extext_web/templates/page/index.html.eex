@@ -3,5 +3,4 @@
   <p class="lead">A productive web framework that<br />does not compromise speed and maintainability.</p>
 </div>
 
-<div id="elm_target">
-  </div>
+<div id="elm_target"></div>
