@@ -6,19 +6,29 @@ defmodule ExtextWeb.FilesController do
     files = Extext.Documents.scan()
     render conn, "index.json", files: files
   end
+
+  def contents(conn, %{"filepath" => filepath}) do
+    case Extext.Documents.read(filepath) do
+      {:ok, file} -> render conn, "contents.json", file: file
+      _ -> {:err}
+    end
+  end
 end
 
 defmodule ExtextWeb.FilesView do
   def render("index.json", %{files: files}) do
-#    %{ files: Enum.map(files, &file_json/1) }
     files
     |> Enum.map(&Path.split/1)
+  end
+
+  def render("contents.json", %{file: file}) do
+    file |> file_json
   end
 
   defp file_json(file) do
     %{
       path: file.path,
-      contents: file.contents
+      lines: Enum.to_list(file)
     }
   end
 end
