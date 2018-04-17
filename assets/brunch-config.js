@@ -49,7 +49,8 @@ exports.config = {
             ignore: [/vendor/]
         },
         elmBrunch: {
-            mainModules: ['elm/Main.elm'],
+            sourceDirectories: ['./elm', './elm/*'],
+            mainModules: ['./elm/Main.elm'],
             makeParameters: ['--debug'],
             outputFolder: 'js/'
         },
