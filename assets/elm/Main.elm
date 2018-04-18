@@ -15,13 +15,19 @@ main = Html.program
 type alias Model =
     { available : List TxtFile
     , history : List String
+    , current : TxtFile
     }
+type alias TxtFile =
+    { title: String
+    , contents: String
+    }
+emptyTxtFile = TxtFile "Welcome" "Select a file."
 
 type Msg =
     Populate (Result Http.Error TxtFileList)
-    | Display String
+    | Display TxtFile
 
-init = ( Model [] [], loadFiles )
+init = ( Model [] [] emptyTxtFile, loadFiles )
 
 -- view
 
@@ -35,8 +41,8 @@ contentsList files =
 view model =
     let
         tableOfContents = Html.ul [] (contentsList model.available)
-        header = Html.h2 [] [Html.text "Test Header"]
-        displayContainer = Html.div [] [Html.text "Display container"]
+        header = Html.h2 [] [Html.text model.current.title]
+        displayContainer = Html.div [] [Html.text model.current.contents]
     in
         Html.div [] [
             tableOfContents
@@ -48,15 +54,14 @@ view model =
 
 update msg model =
     case msg of
-        Populate (Ok txtFiles) -> (Model txtFiles [], Cmd.none)
+        Populate (Ok txtFiles) ->
+            let updatedModel = { model | available = txtFiles }
+            in (updatedModel, Cmd.none)
+--        Populate (Ok txtFiles) -> (Model txtFiles [], Cmd.none)
         Populate (Err e) -> (model, Cmd.none)
-        Display title -> init
+        Display txtFile -> init
 
 -- JSON
-type alias TxtFile =
-    { title: String
-    , contents: String
-    }
 type alias TxtFileList = List TxtFile
 txtFileDecoder = map2 TxtFile (field "title" string) (field "contents" string)
 txtFileListDecoder = list txtFileDecoder
