@@ -19,8 +19,8 @@ defmodule ExtextWeb.Router do
     get "/", PageController, :index
   end
 
-   scope "/api", ExtextWeb do
+   scope "/files", ExtextWeb do
      pipe_through :api
-     resources "/files", FilesController
+     resources "/", FilesController
    end
 end

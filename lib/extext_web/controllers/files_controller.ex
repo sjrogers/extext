@@ -15,7 +15,7 @@ defmodule ExtextWeb.FilesView do
 
   defp file_json(file) do
     %{
-      path: file,
+      title: file |> Path.basename,
       contents: Extext.Documents.read(file) |> Enum.join
     }
   end
