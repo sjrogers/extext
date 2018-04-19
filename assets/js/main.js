@@ -13100,7 +13100,7 @@ var _user$project$Main$view = function (model) {
 		_elm_lang$html$Html$ul,
 		{
 			ctor: '::',
-			_0: A2(_elm_lang$html$Html_Attributes$attribute, 'class', 'extextMenu'),
+			_0: A2(_elm_lang$html$Html_Attributes$attribute, 'class', 'list-unstyled'),
 			_1: {ctor: '[]'}
 		},
 		_user$project$Main$contentsList(model.available));

@@ -1,7 +1,7 @@
 defmodule Extext.Documents do
   @moduledoc false
   def scan(root) do
-    glob = root <> "/**/*.{md,MD,Md,txt}"
+    glob = root <> "/**/*.{txt,TXT}"
     Path.wildcard(glob)
   end
 

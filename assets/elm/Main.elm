@@ -48,7 +48,7 @@ view model =
     let
         tableOfContents =
             ul
-            [ attribute "class" "extextMenu" ]
+            [ attribute "class" "list-unstyled" ]
             (contentsList model.available)
         tableOfContentsDiv =
             div
