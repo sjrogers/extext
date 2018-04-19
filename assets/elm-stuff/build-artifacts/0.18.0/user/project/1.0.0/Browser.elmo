@@ -1,0 +1,4 @@
+var _user$project$Browser$Browser = F2(
+	function (a, b) {
+		return {history: a, available: b};
+	});

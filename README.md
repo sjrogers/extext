@@ -1,19 +1,13 @@
 # Extext
 
-To start your Phoenix server:
+in-browser text reader built for CPSC4100 at the
+University of Tennessee at Chattanooga during the
+2018 spring semester
 
-  * Install dependencies with `mix deps.get`
-  * Install Node.js dependencies with `cd assets && npm install`
-  * Start Phoenix endpoint with `mix phx.server`
+## Installation and usage
 
-Now you can visit [`localhost:4000`](http://localhost:4000) from your browser.
+This is an academic exercise. No one will ever need
+to install *or* run it. If you *really* want to, that's
+an academic exercise for you.
 
-Ready to run in production? Please [check our deployment guides](http://www.phoenixframework.org/docs/deployment).
-
-## Learn more
-
-  * Official website: http://www.phoenixframework.org/
-  * Guides: http://phoenixframework.org/docs/overview
-  * Docs: https://hexdocs.pm/phoenix
-  * Mailing list: http://groups.google.com/group/phoenix-talk
-  * Source: https://github.com/phoenixframework/phoenix
+## 
