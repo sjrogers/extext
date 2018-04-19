@@ -54,15 +54,20 @@ view model =
 
 update msg model =
     case msg of
+        -- if file list loads successfully
         Populate (Ok txtFiles) ->
-            let updatedModel = { model | available = txtFiles }
-            in (updatedModel, Cmd.none)
+            let
+                updatedModel = { model | available = txtFiles }
+            in
+                (updatedModel, Cmd.none)
+        -- if an error occurs in loading file list
         Populate (Err _) ->
             let
                 errorFile = TxtFile "Error!" "Could not load files."
                 errorModel = { model | current = errorFile }
             in
                 (errorModel, Cmd.none)
+        -- display specified text file
         Display txtFile ->
             let
                 fileModel = { model | current = txtFile }
