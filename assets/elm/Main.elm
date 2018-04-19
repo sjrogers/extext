@@ -24,7 +24,7 @@ type alias TxtFile =
 emptyTxtFile = TxtFile "Welcome" "Select a file."
 
 type Msg =
-    Populate (Result Http.Error TxtFileList)
+    Populate (Result Http.Error (List TxtFile))
     | Display TxtFile
 
 init = ( Model [] [] emptyTxtFile, loadFiles )
@@ -70,10 +70,14 @@ update msg model =
                 (fileModel, Cmd.none)
 
 -- JSON
-type alias TxtFileList = List TxtFile
-txtFileDecoder = map2 TxtFile (field "title" string) (field "contents" string)
-txtFileListDecoder = list txtFileDecoder
+
 loadFiles: Cmd Msg
 loadFiles =
-    let result = Http.get "/files" txtFileListDecoder
-    in Http.send Populate result
+    let
+        txtFileDecoder =
+            map2 TxtFile
+                (field "title" string)
+                (field "contents" string)
+        result = Http.get "/files" (list txtFileDecoder)
+    in
+        Http.send Populate result
