@@ -33,10 +33,12 @@ init = ( Model [] [] emptyTxtFile, loadFiles )
 
 fileEntry: TxtFile -> Html.Html Msg
 fileEntry f =
---    Html.button [ onClick (Display f.contents) ] [Html.text f.title]
     Html.button [ onClick (Display f) ] [Html.text f.title]
 contentsList files =
-    (List.map (\x -> Html.li [] [fileEntry x]) files)
+    let
+        fileLi f = Html.li [] [fileEntry f]
+    in
+        (List.map fileLi files)
 
 view model =
     let
