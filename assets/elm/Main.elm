@@ -1,6 +1,6 @@
 module Main exposing (..)
 
-import Html
+import Html exposing (text, h2, h3, div, ul, li)
 import Html.Events exposing (onClick)
 import Html.Attributes exposing (attribute)
 import Json.Decode exposing (map2, field, string, list)
@@ -38,31 +38,35 @@ contentsList files =
             Html.button
             [ attribute "class" "btn"
             , onClick (Display f) ]
-            [Html.text f.title]
+            [text f.title]
         fileLi f =
-            Html.li [] [fileEntry f]
+            li [] [fileEntry f]
     in
         (List.map fileLi files)
 
 view model =
     let
         tableOfContents =
-            Html.ul
+            ul
             [ attribute "class" "extextMenu" ]
             (contentsList model.available)
         tableOfContentsDiv =
-            Html.div
+            div
             [ attribute "class" "col-md-4" ]
-            [tableOfContents]
-        header = Html.h2
+            [ tableOfContents]
+        header =
+            h2
             [ attribute "class" "text-right" ]
-            [Html.text model.current.title]
-        txtFileContentsDiv = Html.div [] [Html.text model.current.contents]
-        displayContainer = Html.div
+            [text model.current.title]
+        txtFileContentsDiv =
+            div
+            []
+            [text model.current.contents]
+        displayContainer = div
             [ attribute "class" "col-md-8 pull-right" ]
             [ header, txtFileContentsDiv ]
     in
-        Html.div
+        div
         [ attribute "class" "row" ]
         [
             tableOfContentsDiv
