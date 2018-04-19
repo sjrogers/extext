@@ -34,7 +34,7 @@ init = ( Model [] [] emptyTxtFile, loadFiles )
 fileEntry: TxtFile -> Html.Html Msg
 fileEntry f =
 --    Html.button [ onClick (Display f.contents) ] [Html.text f.title]
-    Html.button [] [Html.text f.title]
+    Html.button [ onClick (Display f) ] [Html.text f.title]
 contentsList files =
     (List.map (\x -> Html.li [] [fileEntry x]) files)
 
@@ -57,9 +57,17 @@ update msg model =
         Populate (Ok txtFiles) ->
             let updatedModel = { model | available = txtFiles }
             in (updatedModel, Cmd.none)
---        Populate (Ok txtFiles) -> (Model txtFiles [], Cmd.none)
-        Populate (Err e) -> (model, Cmd.none)
-        Display txtFile -> init
+        Populate (Err _) ->
+            let
+                errorFile = TxtFile "Error!" "Could not load files."
+                errorModel = { model | current = errorFile }
+            in
+                (errorModel, Cmd.none)
+        Display txtFile ->
+            let
+                fileModel = { model | current = txtFile }
+            in
+                (fileModel, Cmd.none)
 
 -- JSON
 type alias TxtFileList = List TxtFile
